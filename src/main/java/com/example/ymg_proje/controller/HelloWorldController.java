@@ -12,6 +12,6 @@ public class HelloWorldController {
     public String helloWorld(){
         return  "hello world serkan can eyvaz";
     }
-    printf("merhaba");
+   
 
 }
