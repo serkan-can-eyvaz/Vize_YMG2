@@ -10,7 +10,7 @@ public class HelloWorldController {
 
     @GetMapping()
     public String helloWorld(){
-        return  "hello world serkan can eray akgül ";
+        return  "hello world serkan can eyvaz merhaba ";
 
     }
    
