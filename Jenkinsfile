@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-        maven 'maven_3_5_0'
-    }
+
     stages {
         stage('Build Maven') {
             steps {
@@ -10,7 +8,7 @@ pipeline {
                     branches: [[name: '*/main']],
                     userRemoteConfigs: [[url: 'https://github.com/serkan-can-eyvaz/Vize_YMG2']]
                 )
-                bat 'mvn clean install'
+
             }
         }
         stage('Build docker image'){
