@@ -13,9 +13,7 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
-        stage('Stop and Remove Existing Container') {
 
-                        }
         stage('Build docker image'){
             steps{
                 script{
