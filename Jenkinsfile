@@ -1,28 +1,32 @@
 pipeline {
     agent any
-
+    tools {
+        maven 'maven_3_5_0'
+    }
     stages {
-        stage('Checkout') {
+        stage('Build Maven') {
             steps {
-                git 'https://github.com/serkan-can-eyvaz/Vize_YMG2'
+                checkout scmGit(
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/serkan-can-eyvaz/Vize_YMG2']]
+                )
+                bat 'mvn clean install'
             }
         }
-
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    docker.build("demo_deneme:${env.BUILD_NUMBER}")
+        stage('Build docker image'){
+            steps{
+                script{
+                    docker.build("serkanCAnEyv23:${env.BUILD_NUMBER}")
                 }
             }
         }
+        stage('Push image to Hub'){
+            steps{
+                script{
+                    docker.image("serkanCAnEyv23:${env.BUILD_NUMBER}").run("-d -p 8090:8090 --name demo-container")
 
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    docker.image("demo_deneme:${env.BUILD_NUMBER}").run("-d -p 8989:8080 --name demo-container")
                 }
             }
         }
     }
-
 }
