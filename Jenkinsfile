@@ -17,7 +17,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    docker.build("serkan23:${env.BUILD_NUMBER}")
+                    docker.build("serkan23/app:${env.BUILD_NUMBER}")
                 }
             }
         }
