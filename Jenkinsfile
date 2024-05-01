@@ -14,13 +14,7 @@ pipeline {
             }
         }
         stage('Stop and Remove Existing Container') {
-                             steps {
-                                 script {
-                                   // Varolan container'ı durdur ve sil
-                                            bat 'docker stop serkan23'
-                                            bat 'docker rm serkan23'
-                                        }
-                                   }
+
                         }
         stage('Build docker image'){
             steps{
@@ -32,7 +26,7 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                    docker.image("serkan23/app:${env.BUILD_NUMBER}").run("-d -p 8082:8082 ")
+                    docker.image("serkan23/app:${env.BUILD_NUMBER}").run("-d -p 8082:8082 --name serkan23")
                 }
             }
         }
