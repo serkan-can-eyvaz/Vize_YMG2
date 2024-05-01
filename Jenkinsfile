@@ -21,13 +21,14 @@ pipeline {
                 }
             }
         }
-        stage('Push image to Hub'){
-            steps{
-                script{
-                    docker.image("serkan23/app:${env.BUILD_NUMBER}").run("-d -p 8082:8082 --name serkan23")
+        stage('Run Docker Container') {
+                    steps {
+                        script {
+                            docker.image("serkan23/app:${env.BUILD_NUMBER}").run("-d -p 8082:8082 --name demo-container")
+                        }
+                    }
                 }
-            }
-        }
+
     }
 
 }
